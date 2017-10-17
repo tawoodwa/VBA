@@ -1,0 +1,25 @@
+Public Sub flattendata()
+Application.ScreenUpdating = False
+
+Dim sh As Worksheet
+Set sh = Worksheets("Sheet1")
+Dim LR As Long
+LR = sh.Range("E" & Rows.Count).End(xlUp).Row
+Dim flattenrange As Range
+Set flattenrange = sh.Range("A1:K" & LR)
+
+With sh
+flattenrange.Copy
+flattenrange.PasteSpecial Paste:=xlPasteValues
+End With
+
+Application.CutCopyMode = False
+
+
+
+
+
+
+
+
+End Sub

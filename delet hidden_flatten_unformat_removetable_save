@@ -1,0 +1,162 @@
+
+Public Sub DeleteHidden_RC_02()
+'Check
+'force calculate entire workbook
+Dim sh As Worksheet
+For Each sh In Worksheets
+    sh.Calculate
+    sh.Cells.EntireRow.Hidden = False
+    sh.Cells.EntireColumn.Hidden = False
+Next
+
+'delete all Hidden rows-columns in all sheets
+    Dim r As Long, c As Long, x As Long
+    Application.ScreenUpdating = False
+    For Each WS In Sheets
+        r = WS.Cells.Find(What:="*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row
+        c = WS.Cells.Find(What:="*", SearchOrder:=xlByColumns, SearchDirection:=xlPrevious).Column
+    For x = r To 1 Step -1
+        If WS.Rows(x).Hidden = True Then WS.Rows(x).Delete
+        Next
+    For x = c To 1 Step -1
+        If WS.Columns(x).Hidden = True Then WS.Columns(x).Delete
+        Next
+    Next
+    Application.ScreenUpdating = True
+End Sub
+
+Public Sub flattendata()
+Application.ScreenUpdating = False
+Application.EnableEvents = False
+'define which worksheets to be used
+
+Dim ed As Worksheet
+Set ed = Worksheets("Event Data")
+Dim mpd As Worksheet
+Set mpd = Worksheets("Model Participant Data")
+Dim ad As Worksheet
+Set ad = Worksheets("Attendee Data")
+Dim sd As Worksheet
+Set sd = Worksheets("Survey Data")
+ad.Columns(24).EntireColumn.Delete
+'set worksheets as a collection to be easily looped
+Dim coll As New Collection
+coll.Add ed
+coll.Add mpd
+coll.Add ad
+coll.Add sd
+Dim i As Long
+For i = 1 To coll.Count
+    Dim LR As Long
+    LR = coll(i).Range("A" & Rows.Count).End(xlUp).Row
+    Dim flattenrange As Range
+    Set flattenrange = coll(i).Range("A1:AL" & LR)
+    Dim TR As Long
+    TR = LR + 1
+    With coll(i)
+        coll(i).Cells.ClearFormats
+        flattenrange.Copy
+        flattenrange.PasteSpecial Paste:=xlPasteValues
+        flattenrange.ClearFormats
+        coll(i).Cells.NumberFormat = "@"
+        coll(i).Range("A" & TR & ":AL1048576").Delete
+        Application.Goto coll(i).Range("A1")
+    End With
+
+Application.CutCopyMode = False
+    
+Next i
+
+'delete attendee pivot data and instructions
+Application.DisplayAlerts = False
+Dim ap As Worksheet
+Set ap = Worksheets("Attendee Pivot")
+Dim ins As Worksheet
+Set ins = Worksheets("Instructions")
+Dim mst As Worksheet
+Set mst = Worksheets("Multi-select Tables")
+mst.Delete
+ap.Delete
+ins.Delete
+Application.DisplayAlerts = True
+Application.EnableEvents = True
+
+End Sub
+
+Sub SaveAsName()
+Dim save_as As Variant
+Dim file_name As String
+Dim ProgramName As String
+file_name = ProgramName
+    ' Get the file name.
+    save_as = Application.GetSaveAsFilename(file_name, _
+        FileFilter:="Excel Files,*.xlsx,All Files,*.*")
+    ' See if the user canceled.
+    If save_as = False Then Exit Sub
+    ' Save the file with the new name.
+    Application.DisplayAlerts = False
+    If LCase$(Right$(save_as, 4)) <> ".xlsx" Then
+        file_name = save_as & ".xlsx"
+    End If
+    ActiveWorkbook.SaveAs Filename:=save_as, FileFormat:= _
+        xlOpenXMLWorkbook, CreateBackup:=False
+    Application.Quit
+End Sub
+
+Sub MakeAllTablesRegularRanges()
+  Dim WS As Worksheet, LO As ListObject, rngTbl As Range
+  
+  For Each WS In Worksheets
+    WS.Cells.EntireRow.Hidden = False
+    WS.Cells.EntireColumn.Hidden = False
+    WS.Visible = xlSheetVisible
+    WS.Cells.Validation.Delete
+    WS.Cells.NumberFormat = "@"
+    For Each LO In WS.ListObjects
+      Set rngTbl = LO.Range
+      LO.Unlist
+      With rngTbl
+         .Interior.ColorIndex = xlColorIndexNone
+         .Font.ColorIndex = xlColorIndexAutomatic
+         .Borders.LineStyle = xlLineStyleNone
+      End With
+    Next
+  Next
+  End Sub
+Sub clean()
+Call SaveWbWithoutPrompt
+Call unprotect
+Call DeleteHidden_RC_02
+Call MakeAllTablesRegularRanges
+Call flattendata
+Call SaveAsName
+
+
+
+
+End Sub
+
+Sub unprotect()
+    Const strPwd As String = "Optimal!"
+    
+    ThisWorkbook.unprotect Password:=strPwd
+    
+    
+End Sub
+Sub SaveWbWithoutPrompt()
+Application.DisplayAlerts = False
+ActiveWorkbook.Save
+Application.DisplayAlerts = True
+End Sub
+
+
+
+
+
+
+
+
+
+
+
+

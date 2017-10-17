@@ -1,0 +1,10 @@
+Private Sub CommandButton1_Click()
+Dim cf As Worksheet
+Set cf = Worksheets("Configuration")
+cf.Range("B53").Value = 0
+cf.Range("B69").Value = 0
+cf.Range("B5").Value = 0
+cf.Range("B41").Value = 0
+cf.Range("B88").Value = 0
+UserForm1.Show
+End Sub

@@ -1,0 +1,61 @@
+Private Sub attendeedatatoggle_Click()
+Dim cf As Worksheet
+Set cf = Worksheets("Configuration")
+If attendeedatatoggle.Value = True Then
+    cf.Range("B53").Value = 1
+    cf.Range("B69").Value = 1
+    attendeedatatoggle.BackColor = RGB(255, 0, 0)
+ElseIf attendeedatatoggle.Value = False Then
+    cf.Range("B53").Value = 0
+    cf.Range("B69").Value = 0
+    attendeedatatoggle.BackColor = &H8000000F
+End If
+End Sub
+
+Private Sub CommandButton2_Click()
+Call clean
+End Sub
+
+Private Sub eventdatatoggle_Click()
+Dim cf As Worksheet
+Set cf = Worksheets("Configuration")
+If eventdatatoggle.Value = True Then
+    cf.Range("B5").Value = 1
+    eventdatatoggle.BackColor = RGB(255, 0, 0)
+ElseIf eventdatatoggle.Value = False Then
+    cf.Range("B5").Value = 0
+    eventdatatoggle.BackColor = &H8000000F
+End If
+End Sub
+
+
+
+Private Sub modelparticipantdatatoggle_Click()
+Dim cf As Worksheet
+Set cf = Worksheets("Configuration")
+If modelparticipantdatatoggle.Value = True Then
+    cf.Range("B41").Value = 1
+    modelparticipantdatatoggle.BackColor = RGB(255, 0, 0)
+ElseIf modelparticipantdatatoggle.Value = False Then
+    cf.Range("B41").Value = 0
+    modelparticipantdatatoggle.BackColor = &H8000000F
+End If
+End Sub
+
+Private Sub surveydatatoggle_Click()
+Dim cf As Worksheet
+Set cf = Worksheets("Configuration")
+If surveydatatoggle.Value = True Then
+    cf.Range("B88").Value = 1
+    surveydatatoggle.BackColor = RGB(255, 0, 0)
+ElseIf surveydatatoggle.Value = False Then
+    cf.Range("B88").Value = 0
+    surveydatatoggle.BackColor = &H8000000F
+End If
+End Sub
+
+
+
+Private Sub UserForm_Click()
+
+End Sub

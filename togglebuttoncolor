@@ -1,0 +1,21 @@
+Private Sub ToggleButton1_Click()
+If ToggleButton1.Value = True Then
+ToggleButton1.BackColor = RGB(0, 255, 0)
+ElseIf ToggleButton1.Value = False Then
+ToggleButton1.BackColor = RGB(255, 0, 0)
+
+
+End If
+
+End Sub
+
+
+
+Dim cf As Worksheet
+Set cf = Worksheets("Configuration")
+If surveydatatoggle.Value = True Then
+    cf.Range("B86").Value = 1
+    surveydatatoggle.BackColor = RGB(255, 0, 0)
+ElseIf surveydatatoggle.Value = False Then
+    cf.Range("B86").Value = 0
+    surveydatatoggle.BackColor = &H8000000F

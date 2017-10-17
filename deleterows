@@ -1,0 +1,24 @@
+Sub deleterows()
+'
+' deleterows Macro
+' delete two rows
+'
+
+'
+    Rows("1:2").Select
+End Sub
+
+
+
+
+Sub Macro2()
+'
+' Macro2 Macro
+'
+
+'
+    Rows("1:1").Select
+    Selection.Delete Shift:=xlUp
+    Rows("1:1").Select
+    Selection.Delete Shift:=xlUp
+End Sub

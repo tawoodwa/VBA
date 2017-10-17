@@ -1,0 +1,10 @@
+Sub saveas()
+'
+' saveas Macro
+myfilename = InputBox("what will you call this file")
+
+'
+    ChDir "C:\Users\twoodward\Downloads"
+    ActiveWorkbook.saveas Filename:="C:\Users\twoodward\Downloads\" & myfilename, _
+        FileFormat:=xlOpenXMLWorkbook, CreateBackup:=False
+End Sub

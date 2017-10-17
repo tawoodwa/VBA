@@ -1,0 +1,29 @@
+Sub SearchMacro()
+
+Dim datadict As Worksheet
+Set datadict = Worksheets("Label Crosswalk")
+Dim macrosheet As Worksheet
+Set macrosheet = Worksheets("stuff")
+
+Dim CR As Long, j As Long
+CR = datadict.Range("F" & Rows.Count).End(xlUp).Row
+Dim LR As Long, i As Long
+LR = macrosheet.Range("E" & Rows.Count).End(xlUp).Row
+
+
+With Worksheets
+    For i = 1 To LR
+        With macrosheet.Range("E" & i)
+            For j = 1 To CR
+                With datadict.Range("F" & j)
+                    If .Value = macrosheet.Range("E" & i) Then
+                    datadict.Range("C" & j).Copy Destination:=macrosheet.Range("J" & i)
+                    End If
+                End With
+            Next j
+        End With
+    Next i
+End With
+
+End Sub
+              

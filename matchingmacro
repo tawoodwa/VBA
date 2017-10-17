@@ -1,0 +1,85 @@
+Option Explicit
+
+Public Sub tallyinquiries()
+Dim sh As Worksheet
+Set sh = Worksheets("Sheet2")
+Dim ds As Worksheet
+Set ds = Worksheets("Decision")
+Dim Inquirycount As Long
+Inquirycount = 0
+
+
+
+Dim LR As Long, CR As Long, j As Long
+LR = ds.Range("D" & Rows.Count).End(xlUp).Row
+CR = sh.Range("A" & Rows.Count).End(xlUp).Row
+For j = 3 To CR - 1
+    With sh
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("F2:F" & LR), sh.Range("D1").Value)
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("G2:G" & LR), sh.Range("D1").Value) + Inquirycount
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("H2:H" & LR), sh.Range("D1").Value) + Inquirycount
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("I2:I" & LR), sh.Range("D1").Value) + Inquirycount
+       sh.Range("D" & j).Value = Inquirycount
+    End With
+Next j
+
+Inquirycount = 0
+
+For j = 3 To CR - 1
+    With sh
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("F2:F" & LR), sh.Range("B1").Value)
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("G2:G" & LR), sh.Range("B1").Value) + Inquirycount
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("H2:H" & LR), sh.Range("B1").Value) + Inquirycount
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("I2:I" & LR), sh.Range("B1").Value) + Inquirycount
+       sh.Range("B" & j).Value = Inquirycount
+    End With
+Next j
+
+Inquirycount = 0
+
+For j = 3 To CR - 1
+    With sh
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("F2:F" & LR), sh.Range("C1").Value)
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("G2:G" & LR), sh.Range("C1").Value) + Inquirycount
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("H2:H" & LR), sh.Range("C1").Value) + Inquirycount
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("I2:I" & LR), sh.Range("C1").Value) + Inquirycount
+       sh.Range("C" & j).Value = Inquirycount
+    End With
+Next j
+
+Inquirycount = 0
+
+For j = 3 To CR - 1
+    With sh
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("F2:F" & LR), sh.Range("E1").Value)
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("G2:G" & LR), sh.Range("E1").Value) + Inquirycount
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("H2:H" & LR), sh.Range("E1").Value) + Inquirycount
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("I2:I" & LR), sh.Range("E1").Value) + Inquirycount
+       sh.Range("E" & j).Value = Inquirycount
+    End With
+Next j
+
+Inquirycount = 0
+
+For j = 3 To CR - 1
+    With sh
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("F2:F" & LR), sh.Range("F1").Value)
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("G2:G" & LR), sh.Range("F1").Value) + Inquirycount
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("H2:H" & LR), sh.Range("F1").Value) + Inquirycount
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("I2:I" & LR), sh.Range("F1").Value) + Inquirycount
+       sh.Range("F" & j).Value = Inquirycount
+    End With
+Next j
+
+Inquirycount = 0
+
+For j = 3 To CR - 1
+    With sh
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("F2:F" & LR), sh.Range("G1").Value)
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("G2:G" & LR), sh.Range("G1").Value) + Inquirycount
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("H2:H" & LR), sh.Range("G1").Value) + Inquirycount
+       Inquirycount = Application.CountIfs(ds.Range("D2:D" & LR), sh.Range("A" & j).Value, ds.Range("I2:I" & LR), sh.Range("G1").Value) + Inquirycount
+       sh.Range("G" & j).Value = Inquirycount
+    End With
+Next j
+End Sub
